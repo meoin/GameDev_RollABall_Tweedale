@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
     private int pickupCount;
     public TextMeshProUGUI countText;
-    public GameObject winText;
+    public GameObject winTextObject;
     public int pickupsNeededToWin = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         pickupCount = 0;
         SetCountText();
-        winText.SetActive(false);
+        winTextObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue)
@@ -36,7 +36,9 @@ public class PlayerController : MonoBehaviour
 
         if (pickupCount >= pickupsNeededToWin) 
         {
-            winText.SetActive(true);
+            winTextObject.SetActive(true);
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Win!";
+            Destroy(GameObject.FindGameObjectWithTag("Enemy"));
         }
     }
 
@@ -53,6 +55,18 @@ public class PlayerController : MonoBehaviour
             other.gameObject.SetActive(false);
             pickupCount++;
             SetCountText();
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Destroy the current object
+            Destroy(gameObject);
+            // Update the winText to display "You Lose!"
+            winTextObject.gameObject.SetActive(true);
+            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
         }
     }
 }
