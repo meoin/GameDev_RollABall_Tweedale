@@ -12,11 +12,15 @@ public class PlayerController : MonoBehaviour
     private int pickupCount;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
-    public int pickupsNeededToWin = 0;
+    public GameObject levelManager;
+
+    private int pickupsNeededToWin;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        pickupsNeededToWin = levelManager.GetComponent<LevelManager>().roomPickups;
+
         rb = GetComponent<Rigidbody>();
         pickupCount = 0;
         SetCountText();
