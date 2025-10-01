@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     private int pickupCount;
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
+    public GameObject pauseMenu;
     public GameObject levelManager;
     private Camera mainCamera;
 
@@ -52,6 +53,7 @@ public class PlayerController : MonoBehaviour
             winTextObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = "You Win!";
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
+            pauseMenu.gameObject.SetActive(true);
         }
     }
 
@@ -80,6 +82,15 @@ public class PlayerController : MonoBehaviour
             // Update the winText to display "You Lose!"
             winTextObject.gameObject.SetActive(true);
             winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+
+            pauseMenu.gameObject.SetActive(true);
+        }
+
+        else if (collision.gameObject.CompareTag("Respawn")) 
+        {
+            transform.position = new Vector3(0, 0.5f, 0);
+            rb.linearVelocity = Vector3.zero; // Stops movement
+            rb.angularVelocity = Vector3.zero; // Stops rotation
         }
     }
 }
