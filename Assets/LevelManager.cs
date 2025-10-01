@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class LevelManager : MonoBehaviour
 {
     public int roomPickups;
+    public int roomEnemies;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

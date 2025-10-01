@@ -1,9 +1,12 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float rotationSpeed = 500f;
+
     public float speed = 0;
     private Rigidbody rb;
     private float movementX;
@@ -13,8 +16,14 @@ public class PlayerController : MonoBehaviour
     public TextMeshProUGUI countText;
     public GameObject winTextObject;
     public GameObject levelManager;
+    private Camera mainCamera;
 
     private int pickupsNeededToWin;
+
+    void Awake() 
+    {
+        mainCamera = Camera.main;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -27,9 +36,9 @@ public class PlayerController : MonoBehaviour
         winTextObject.SetActive(false);
     }
 
-    void OnMove(InputValue movementValue)
+    public void Move(InputAction.CallbackContext movementValue)
     {
-        Vector2 movementVector = movementValue.Get<Vector2>();
+        Vector2 movementVector = movementValue.ReadValue<Vector2>();
         movementX = movementVector.x;
         movementY = movementVector.y;
     }
@@ -48,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 movement = new Vector3(movementX, 0.0f, movementY);
+        Vector3 movement = Quaternion.Euler(0.0f, mainCamera.transform.eulerAngles.y, 0.0f) * new Vector3(movementX, 0.0f, movementY);
         rb.AddForce(movement * speed);
     }
 
