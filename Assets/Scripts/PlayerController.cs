@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.Android;
+//using System.Diagnostics;
 
 public class PlayerController : MonoBehaviour
 {
@@ -13,17 +15,22 @@ public class PlayerController : MonoBehaviour
     private float movementY;
 
     private int pickupCount;
-    public TextMeshProUGUI countText;
-    public GameObject winTextObject;
-    public GameObject pauseMenu;
     public GameObject levelManager;
+    private GameObject winText;
+    private GameObject countText;
     private Camera mainCamera;
 
     private int pickupsNeededToWin;
 
+    public PlayerController Instance;
+
     void Awake() 
     {
+        Instance = this;
         mainCamera = Camera.main;
+        levelManager = FindFirstObjectByType<LevelManager>().gameObject;
+        winText = levelManager.gameObject.GetComponent<LevelManager>().winText;
+        countText = levelManager.gameObject.GetComponent<LevelManager>().countText;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -33,34 +40,68 @@ public class PlayerController : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();
         pickupCount = 0;
-        SetCountText();
-        winTextObject.SetActive(false);
+
+        if (GetGameState() == GameState.Roll)
+        {
+            rb.useGravity = true;
+        }
+        else 
+        {
+            rb.useGravity = false;
+        }
+
+        if (GetGameState() == GameState.Roll) 
+        {
+            SetCountText();
+            levelManager.gameObject.GetComponent<LevelManager>().winText.SetActive(false);
+        }
+    }
+
+    private GameState GetGameState() 
+    {
+        return levelManager.gameObject.GetComponent<LevelManager>().currentState;
     }
 
     public void Move(InputAction.CallbackContext movementValue)
     {
-        Vector2 movementVector = movementValue.ReadValue<Vector2>();
-        movementX = movementVector.x;
-        movementY = movementVector.y;
+        if (GetGameState() == GameState.Roll) 
+        {
+            Vector2 movementVector = movementValue.ReadValue<Vector2>();
+            movementX = movementVector.x;
+            movementY = movementVector.y;
+        }
     }
 
     void SetCountText() 
     {
-        countText.text = $"Count: {pickupCount}";
+        countText.gameObject.SetActive(true);
+
+        countText.GetComponent<TextMeshProUGUI>().text = $"Count: {pickupCount}";
 
         if (pickupCount >= pickupsNeededToWin) 
         {
-            winTextObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Win!";
+            winText.SetActive(true);
+            winText.GetComponent<TextMeshProUGUI>().text = "You Win!";
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-            pauseMenu.gameObject.SetActive(true);
+            levelManager.GetComponent<LevelManager>().PauseScene();
         }
     }
 
     private void FixedUpdate()
     {
-        Vector3 movement = Quaternion.Euler(0.0f, mainCamera.transform.eulerAngles.y, 0.0f) * new Vector3(movementX, 0.0f, movementY);
-        rb.AddForce(movement * speed);
+        GameState state = GetGameState();
+
+        Debug.Log("Game state is " + state);
+
+        if (state == GameState.Menu || state == GameState.Shop)
+        {
+            transform.Rotate(new Vector3(30, 90, 30) * Time.deltaTime);
+        }
+        else if (state == GameState.Roll) 
+        {
+            Vector3 movement = Quaternion.Euler(0.0f, mainCamera.transform.eulerAngles.y, 0.0f) * new Vector3(movementX, 0.0f, movementY);
+            rb.AddForce(movement * speed);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -80,10 +121,10 @@ public class PlayerController : MonoBehaviour
             // Destroy the current object
             Destroy(gameObject);
             // Update the winText to display "You Lose!"
-            winTextObject.gameObject.SetActive(true);
-            winTextObject.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            winText.gameObject.SetActive(true);
+            winText.GetComponent<TextMeshProUGUI>().text = "You Lose!";
 
-            pauseMenu.gameObject.SetActive(true);
+            levelManager.GetComponent<LevelManager>().PauseScene();
         }
 
         else if (collision.gameObject.CompareTag("Respawn")) 

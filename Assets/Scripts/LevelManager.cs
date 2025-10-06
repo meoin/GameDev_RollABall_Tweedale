@@ -2,37 +2,105 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 
+public enum GameState
+{
+    Menu,
+    Paused,
+    Shop,
+    Roll
+}
+
 public class LevelManager : MonoBehaviour
 {
     public int roomPickups;
     public int roomEnemies;
+    public GameObject UI;
     public GameObject pauseMenu;
+    public GameObject mainMenu;
+    public GameObject winText;
+    public GameObject countText;
+    private bool paused = false;
+    
+    public GameState currentState = GameState.Menu;
+
+    public LevelManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(UI);
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        ActivateRandomObjectsWithTag("Pickup", roomPickups);
-        ActivateRandomObjectsWithTag("Enemy", roomEnemies);
+        if (currentState == GameState.Roll)
+        {
+            ActivateRandomObjectsWithTag("Pickup", roomPickups);
+            ActivateRandomObjectsWithTag("Enemy", roomEnemies);
+        }
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        if (currentState == GameState.Roll)
+        {
+            ActivateRandomObjectsWithTag("Pickup", roomPickups);
+            ActivateRandomObjectsWithTag("Enemy", roomEnemies);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape)) 
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            pauseMenu.gameObject.SetActive(!pauseMenu.activeSelf);
+            if (!paused)
+            {
+                PauseScene();
+            }
+            else 
+            {
+                ResumeScene();
+            }
         }
+    }
+
+    public void PauseScene() 
+    {
+        Time.timeScale = 0;
+        pauseMenu.gameObject.SetActive(true);
+        paused = true;
+    }
+
+    public void ResumeScene() 
+    {
+        Time.timeScale = 1;
+        pauseMenu.gameObject.SetActive(false);
+        paused = false;
     }
 
     public void RestartScene() 
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-        SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Minigame");
+        pauseMenu.SetActive(false);
+        paused = false;
     }
 
     public void QuitGame() 
     {
         Application.Quit();
+    }
+
+    public void LoadMinigame() 
+    {
+        mainMenu.SetActive(false);
+
+        currentState = GameState.Roll;
+        SceneManager.LoadScene("Minigame");
     }
 
     private void ActivateRandomObjectsWithTag(string tag, int count)

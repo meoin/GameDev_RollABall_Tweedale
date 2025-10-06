@@ -13,7 +13,10 @@ public class CameraController : MonoBehaviour
 
     private CameraRotation cameraRotation;
 
-    private void Awake() => distanceToPlayer = Vector3.Distance(transform.position, target.position);
+    private void Awake()
+    {
+        distanceToPlayer = Vector3.Distance(transform.position, target.position);
+    }
 
     private void Update() 
     {
