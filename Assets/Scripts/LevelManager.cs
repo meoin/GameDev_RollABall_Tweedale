@@ -13,7 +13,9 @@ public enum GameState
 public class LevelManager : MonoBehaviour
 {
     public int roomPickups;
+    public int pickupValue;
     public int roomEnemies;
+    public float timeLimit;
     public GameObject UI;
     public GameObject pauseMenu;
     public GameObject mainMenu;
@@ -66,6 +68,26 @@ public class LevelManager : MonoBehaviour
                 ResumeScene();
             }
         }
+    }
+
+    public void IncreasePickups() 
+    {
+        roomPickups++;
+    }
+
+    public void IncreaseDifficulty() 
+    {
+        roomEnemies++;
+    }
+
+    public void IncreasePickupValue() 
+    {
+        pickupValue = pickupValue * 2;
+    }
+
+    public void IncreaseTimeLimit() 
+    {
+        timeLimit += 5;
     }
 
     public void PauseScene() 
