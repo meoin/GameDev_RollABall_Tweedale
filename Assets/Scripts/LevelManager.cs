@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public enum GameState
 {
+    Init,
     Menu,
     Paused,
     Shop,
@@ -19,6 +20,7 @@ public class LevelManager : MonoBehaviour
     public GameObject UI;
     public GameObject pauseMenu;
     public GameObject mainMenu;
+    public GameObject shopMenu;
     public GameObject winText;
     public GameObject countText;
     private bool paused = false;
@@ -38,6 +40,12 @@ public class LevelManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        if (currentState == GameState.Init)
+        {
+            SceneManager.LoadScene("MainMenu");
+            mainMenu.SetActive(true);
+            currentState = GameState.Menu;
+        }
         if (currentState == GameState.Roll)
         {
             ActivateRandomObjectsWithTag("Pickup", roomPickups);
@@ -72,21 +80,25 @@ public class LevelManager : MonoBehaviour
 
     public void IncreasePickups() 
     {
+        Debug.Log($"Increasing pickups: {roomPickups} -> {roomPickups + 1}...");
         roomPickups++;
     }
 
     public void IncreaseDifficulty() 
     {
+        Debug.Log($"Increasing enemies: {roomEnemies} -> {roomEnemies + 1}...");
         roomEnemies++;
     }
 
     public void IncreasePickupValue() 
     {
+        Debug.Log($"Increasing pickup value: {pickupValue} -> {pickupValue * 2}...");
         pickupValue = pickupValue * 2;
     }
 
     public void IncreaseTimeLimit() 
     {
+        Debug.Log($"Increasing time limit: {timeLimit} -> {timeLimit + 5}...");
         timeLimit += 5;
     }
 
@@ -120,9 +132,31 @@ public class LevelManager : MonoBehaviour
     public void LoadMinigame() 
     {
         mainMenu.SetActive(false);
+        shopMenu.SetActive(false);
+        Debug.Log("Loading Minigame...");
 
         currentState = GameState.Roll;
         SceneManager.LoadScene("Minigame");
+    }
+
+    public void LoadShop() 
+    {
+        Debug.Log("Loading Shop...");
+        currentState = GameState.Shop;
+        SceneManager.LoadScene("Shop");
+        shopMenu.SetActive(true);
+    }
+
+    public void ReturnToMenu() 
+    {
+        pauseMenu.gameObject.SetActive(false);
+        paused = false;
+
+        currentState = GameState.Menu;
+        SceneManager.LoadScene("MainMenu");
+        mainMenu.SetActive(true);
+
+        Time.timeScale = 1;
     }
 
     private void ActivateRandomObjectsWithTag(string tag, int count)

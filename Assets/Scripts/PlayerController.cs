@@ -80,10 +80,10 @@ public class PlayerController : MonoBehaviour
 
         if (pickupCount >= pickupsNeededToWin) 
         {
-            winText.SetActive(true);
-            winText.GetComponent<TextMeshProUGUI>().text = "You Win!";
+            //winText.SetActive(true);
+            //winText.GetComponent<TextMeshProUGUI>().text = "You Win!";
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
-            levelManager.GetComponent<LevelManager>().PauseScene();
+            levelManager.GetComponent<LevelManager>().LoadShop();
         }
     }
 
@@ -91,7 +91,7 @@ public class PlayerController : MonoBehaviour
     {
         GameState state = GetGameState();
 
-        Debug.Log("Game state is " + state);
+        //Debug.Log("Game state is " + state);
 
         if (state == GameState.Menu || state == GameState.Shop)
         {
@@ -119,12 +119,12 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             // Destroy the current object
-            Destroy(gameObject);
+            //Destroy(gameObject);
             // Update the winText to display "You Lose!"
-            winText.gameObject.SetActive(true);
-            winText.GetComponent<TextMeshProUGUI>().text = "You Lose!";
+            //winText.gameObject.SetActive(true);
+            //winText.GetComponent<TextMeshProUGUI>().text = "You Lose!";
 
-            levelManager.GetComponent<LevelManager>().PauseScene();
+            levelManager.GetComponent<LevelManager>().LoadShop();
         }
 
         else if (collision.gameObject.CompareTag("Respawn")) 
