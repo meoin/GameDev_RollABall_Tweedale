@@ -1,6 +1,7 @@
+using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Collections.Generic;
 
 public enum GameState
 {
@@ -13,11 +14,13 @@ public enum GameState
 
 public class LevelManager : MonoBehaviour
 {
+    public int moneyTotal;
     public int roomPickups;
     public int pickupValue;
     public int roomEnemies;
     public float timeLimit;
     public GameObject UI;
+    public GameObject shopManager;
     public GameObject pauseMenu;
     public GameObject mainMenu;
     public GameObject shopMenu;
@@ -33,6 +36,7 @@ public class LevelManager : MonoBehaviour
     {
         Instance = this;
         DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(shopManager);
         DontDestroyOnLoad(UI);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
@@ -78,6 +82,18 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    public void SetCoinText() 
+    {
+        countText.gameObject.SetActive(true);
+        countText.GetComponent<TextMeshProUGUI>().text = $"${moneyTotal}";
+    }
+
+    public void SubtractMoney(int cost) 
+    {
+        moneyTotal -= cost;
+        SetCoinText();
+    }
+
     public void IncreasePickups() 
     {
         Debug.Log($"Increasing pickups: {roomPickups} -> {roomPickups + 1}...");
@@ -100,6 +116,11 @@ public class LevelManager : MonoBehaviour
     {
         Debug.Log($"Increasing time limit: {timeLimit} -> {timeLimit + 5}...");
         timeLimit += 5;
+    }
+
+    public void PickupCoin() 
+    {
+        moneyTotal += pickupValue;
     }
 
     public void PauseScene() 
@@ -145,6 +166,7 @@ public class LevelManager : MonoBehaviour
         currentState = GameState.Shop;
         SceneManager.LoadScene("Shop");
         shopMenu.SetActive(true);
+        shopManager.GetComponent<ShopManager>().SetShopInteractables();
     }
 
     public void ReturnToMenu() 

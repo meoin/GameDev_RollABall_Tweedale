@@ -934,9 +934,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 809994376}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: IncreasePickupValue
+      - m_Target: {fileID: 1388916116}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: PurchaseCoinValue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1310,9 +1310,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 809994376}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: IncreaseTimeLimit
+      - m_Target: {fileID: 1388916116}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: PurchaseTimeLimit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1468,11 +1468,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7021c17fc78e4894ebce1378807979e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moneyTotal: 0
   roomPickups: 4
   pickupValue: 1
   roomEnemies: 1
   timeLimit: 10
   UI: {fileID: 616142620}
+  shopManager: {fileID: 1388916115}
   pauseMenu: {fileID: 1923089257}
   mainMenu: {fileID: 684496534}
   shopMenu: {fileID: 431240875}
@@ -2834,6 +2836,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371534601}
   m_CullTransparentMesh: 1
+--- !u!1 &1388916115
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1388916117}
+  - component: {fileID: 1388916116}
+  m_Layer: 0
+  m_Name: ShopManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1388916116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388916115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa29676f5ec84f640b73a18a15ed1a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelManager: {fileID: 809994375}
+  shopMenu: {fileID: 431240875}
+  coinQuantityButton: {fileID: 2020131798}
+  coinQuantityCost: 5
+  coinValueButton: {fileID: 468683740}
+  coinValueCost: 15
+  timeIncreaseButton: {fileID: 638008620}
+  timeIncreaseCost: 20
+  difficultyPurchaseButton: {fileID: 1866617375}
+  difficultyPurchaseCost: 100
+  areaPurchaseButton: {fileID: 1371534603}
+  areaPurchaseCost: 10000
+--- !u!4 &1388916117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388916115}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -12.374124, y: -8.769396, z: 9.153064}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1396045548
 GameObject:
   m_ObjectHideFlags: 0
@@ -3996,9 +4054,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 809994376}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: IncreaseDifficulty
+      - m_Target: {fileID: 1388916116}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: PurchaseDifficulty
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4207,9 +4265,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 809994376}
-        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
-        m_MethodName: IncreasePickups
+      - m_Target: {fileID: 1388916116}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: PurchaseCoinQuantity
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4534,3 +4592,4 @@ SceneRoots:
   - {fileID: 809994377}
   - {fileID: 616142624}
   - {fileID: 71145552}
+  - {fileID: 1388916117}

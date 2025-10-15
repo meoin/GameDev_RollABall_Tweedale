@@ -52,7 +52,7 @@ public class PlayerController : MonoBehaviour
 
         if (GetGameState() == GameState.Roll) 
         {
-            SetCountText();
+            PickupObject();
             levelManager.gameObject.GetComponent<LevelManager>().winText.SetActive(false);
         }
     }
@@ -72,11 +72,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void SetCountText() 
+    void PickupObject() 
     {
-        countText.gameObject.SetActive(true);
-
-        countText.GetComponent<TextMeshProUGUI>().text = $"Count: {pickupCount}";
+        levelManager.GetComponent<LevelManager>().SetCoinText();
 
         if (pickupCount >= pickupsNeededToWin) 
         {
@@ -110,7 +108,8 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             pickupCount++;
-            SetCountText();
+            levelManager.GetComponent<LevelManager>().PickupCoin();
+            PickupObject();
         }
     }
 
