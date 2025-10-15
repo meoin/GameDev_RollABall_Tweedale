@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public enum GameState
 {
@@ -19,11 +20,13 @@ public class LevelManager : MonoBehaviour
     public int pickupValue;
     public int roomEnemies;
     public float timeLimit;
+    private float timerStatus;
     public GameObject UI;
     public GameObject shopManager;
     public GameObject pauseMenu;
     public GameObject mainMenu;
     public GameObject shopMenu;
+    public GameObject timerText;
     public GameObject winText;
     public GameObject countText;
     private bool paused = false;
@@ -69,6 +72,12 @@ public class LevelManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (currentState == GameState.Roll) 
+        {
+            timerStatus -= Time.deltaTime;
+            DisplayTimer();
+        }
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!paused)
@@ -150,8 +159,28 @@ public class LevelManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void ResetTimer() 
+    {
+        timerText.SetActive(true);
+        timerStatus = timeLimit;
+    }
+
+    private void DisplayTimer() 
+    {
+        float minutes = Mathf.FloorToInt(timerStatus / 60);
+        float seconds = Mathf.FloorToInt(timerStatus % 60);
+
+        timerText.GetComponent<TextMeshProUGUI>().text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        if (timerStatus < 0) 
+        {
+            LoadShop();
+        }
+    }
+
     public void LoadMinigame() 
     {
+        ResetTimer();
         mainMenu.SetActive(false);
         shopMenu.SetActive(false);
         Debug.Log("Loading Minigame...");
@@ -162,6 +191,7 @@ public class LevelManager : MonoBehaviour
 
     public void LoadShop() 
     {
+        timerText.SetActive(false);
         Debug.Log("Loading Shop...");
         currentState = GameState.Shop;
         SceneManager.LoadScene("Shop");
@@ -177,6 +207,7 @@ public class LevelManager : MonoBehaviour
         currentState = GameState.Menu;
         SceneManager.LoadScene("MainMenu");
         mainMenu.SetActive(true);
+        timerText.SetActive(false);
 
         Time.timeScale = 1;
     }

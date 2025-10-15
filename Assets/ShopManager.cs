@@ -64,7 +64,9 @@ public class ShopManager : MonoBehaviour
     {
         int coins = levelManager.GetComponent<LevelManager>().moneyTotal;
 
-        if (coins <= coinQuantityCost) 
+        Debug.Log($"Purchasing more coins: {coins}/{coinQuantityCost}");
+
+        if (coins >= coinQuantityCost) 
         {
             levelManager.GetComponent<LevelManager>().IncreasePickups();
             levelManager.GetComponent<LevelManager>().SubtractMoney(coinQuantityCost);
@@ -78,7 +80,7 @@ public class ShopManager : MonoBehaviour
     {
         int coins = levelManager.GetComponent<LevelManager>().moneyTotal;
 
-        if (coins <= coinValueCost)
+        if (coins >= coinValueCost)
         {
             levelManager.GetComponent<LevelManager>().IncreasePickupValue();
             levelManager.GetComponent<LevelManager>().SubtractMoney(coinValueCost);
@@ -92,7 +94,7 @@ public class ShopManager : MonoBehaviour
     {
         int coins = levelManager.GetComponent<LevelManager>().moneyTotal;
 
-        if (coins <= timeIncreaseCost)
+        if (coins >= timeIncreaseCost)
         {
             levelManager.GetComponent<LevelManager>().IncreaseTimeLimit();
             levelManager.GetComponent<LevelManager>().SubtractMoney(timeIncreaseCost);
@@ -106,7 +108,7 @@ public class ShopManager : MonoBehaviour
     {
         int coins = levelManager.GetComponent<LevelManager>().moneyTotal;
 
-        if (coins <= difficultyPurchaseCost)
+        if (coins >= difficultyPurchaseCost)
         {
             levelManager.GetComponent<LevelManager>().IncreaseDifficulty();
             levelManager.GetComponent<LevelManager>().SubtractMoney(difficultyPurchaseCost);
