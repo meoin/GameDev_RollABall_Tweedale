@@ -52,7 +52,6 @@ public class PlayerController : MonoBehaviour
 
         if (GetGameState() == GameState.Roll) 
         {
-            PickupObject();
             levelManager.gameObject.GetComponent<LevelManager>().winText.SetActive(false);
         }
     }
@@ -72,8 +71,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void PickupObject() 
+    public void PickupObject() 
     {
+        pickupCount++;
+
+        levelManager.GetComponent<LevelManager>().PickupCoin();
         levelManager.GetComponent<LevelManager>().SetCoinText();
 
         if (pickupCount >= pickupsNeededToWin) 
@@ -104,12 +106,9 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Pickup"))
+        if (other.gameObject.CompareTag("PickupHitbox"))
         {
-            other.gameObject.SetActive(false);
-            pickupCount++;
-            levelManager.GetComponent<LevelManager>().PickupCoin();
-            PickupObject();
+            other.gameObject.GetComponentInParent<PickupManager>().isPickedUp = true;
         }
     }
 
