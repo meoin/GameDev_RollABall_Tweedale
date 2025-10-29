@@ -82,6 +82,7 @@ public class PlayerController : MonoBehaviour
         {
             //winText.SetActive(true);
             //winText.GetComponent<TextMeshProUGUI>().text = "You Win!";
+            levelManager.GetComponent<LevelManager>().GiveAllPickupsBonus();
             Destroy(GameObject.FindGameObjectWithTag("Enemy"));
             levelManager.GetComponent<LevelManager>().LoadShop();
         }

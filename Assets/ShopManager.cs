@@ -21,6 +21,10 @@ public class ShopManager : MonoBehaviour
     public Button areaPurchaseButton;
     public int areaPurchaseCost;
     private string areaPurchaseText;
+    public Button bonusPurchaseButton;
+    public int bonusPurchaseCost;
+    private string bonusPurchaseText;
+    private int bonusPurchased = 0;
 
     public void Start()
     {
@@ -29,6 +33,8 @@ public class ShopManager : MonoBehaviour
         timeIncreaseText = timeIncreaseButton.GetComponentInChildren<TextMeshProUGUI>().text;
         difficultyPurchaseText = difficultyPurchaseButton.GetComponentInChildren<TextMeshProUGUI>().text;
         areaPurchaseText = areaPurchaseButton.GetComponentInChildren<TextMeshProUGUI>().text;
+        bonusPurchaseText = bonusPurchaseButton.GetComponentInChildren<TextMeshProUGUI>().text;
+        
     }
 
     public void SetShopInteractables() 
@@ -40,6 +46,7 @@ public class ShopManager : MonoBehaviour
         SetButtonInteractable(timeIncreaseButton, timeIncreaseCost, timeIncreaseText, coins);
         SetButtonInteractable(difficultyPurchaseButton, difficultyPurchaseCost,difficultyPurchaseText ,coins);
         SetButtonInteractable(areaPurchaseButton, areaPurchaseCost, areaPurchaseText, coins);
+        SetButtonInteractable(bonusPurchaseButton, bonusPurchaseCost, bonusPurchaseText, coins);
     }
 
     public void SetButtonInteractable(Button btn, int cost, string text, int money) 
@@ -113,6 +120,23 @@ public class ShopManager : MonoBehaviour
             levelManager.GetComponent<LevelManager>().IncreaseDifficulty();
             levelManager.GetComponent<LevelManager>().SubtractMoney(difficultyPurchaseCost);
             difficultyPurchaseCost *= 5;
+
+            SetShopInteractables();
+        }
+    }
+
+    public void PurchaseBonusMultiplier()
+    {
+        int coins = levelManager.GetComponent<LevelManager>().moneyTotal;
+
+        if (coins >= bonusPurchaseCost)
+        {
+            levelManager.GetComponent<LevelManager>().allPickupBonus += 1;
+            bonusPurchaseCost *= 5;
+
+            int nextMult = levelManager.GetComponent<LevelManager>().allPickupBonus + 2;
+
+            bonusPurchaseText = $"x{nextMult} Bonus for Collecting All Pickups";
 
             SetShopInteractables();
         }

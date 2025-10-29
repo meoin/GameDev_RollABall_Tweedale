@@ -30,6 +30,7 @@ public class LevelManager : MonoBehaviour
     public GameObject winText;
     public GameObject countText;
     private bool paused = false;
+    public int allPickupBonus = 0;
     
     public GameState currentState = GameState.Menu;
 
@@ -130,6 +131,12 @@ public class LevelManager : MonoBehaviour
     public void PickupCoin() 
     {
         moneyTotal += pickupValue;
+    }
+
+    public void GiveAllPickupsBonus() 
+    {
+        moneyTotal += (roomPickups * allPickupBonus);
+        SetCoinText();
     }
 
     public void PauseScene() 
