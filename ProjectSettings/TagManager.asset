@@ -7,6 +7,7 @@ TagManager:
   - Pickup
   - Enemy
   - PickupHitbox
+  - Ball
   layers:
   - Default
   - TransparentFX
