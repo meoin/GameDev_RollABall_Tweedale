@@ -17,13 +17,14 @@ public class PlayerControllerNew : MonoBehaviour
     private Camera mainCamera;
     private CameraController cameraController;
     private BallController ballController;
-    private bool throwing;
-    private bool charging;
-    private float chargePercentage;
 
     private int pickupCount;
 
     public Slider chargeSlider;
+    private bool throwing;
+    private bool charging;
+    private float chargePercentage;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,12 +35,13 @@ public class PlayerControllerNew : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ballController = ball.GetComponent<BallController>();
         cameraController = mainCamera.GetComponent<CameraController>();
+
+        new Vector3()
     }
 
     // Update is called once per frame
     void Update()
     {
-
         // get movement direction
         Vector3 movement = Quaternion.Euler(0.0f, mainCamera.transform.eulerAngles.y, 0.0f) * new Vector3(movementX, 0.0f, movementY);
 

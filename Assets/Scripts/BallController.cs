@@ -13,6 +13,8 @@ public class BallController : MonoBehaviour
 
     private CameraController camera;
 
+    public GameObject loopDestination;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -67,6 +69,10 @@ public class BallController : MonoBehaviour
         if (other.gameObject.CompareTag("PickupHitbox"))
         {
             other.gameObject.GetComponentInParent<PickupManager>().isPickedUp = true;
+        }
+        else if (other.gameObject.CompareTag("Portal"))
+        {
+            transform.position = loopDestination.transform.position;
         }
     }
 
