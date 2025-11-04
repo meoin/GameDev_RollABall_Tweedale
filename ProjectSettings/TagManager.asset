@@ -9,6 +9,7 @@ TagManager:
   - PickupHitbox
   - Ball
   - Portal
+  - Pet
   layers:
   - Default
   - TransparentFX

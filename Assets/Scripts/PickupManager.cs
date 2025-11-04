@@ -14,6 +14,8 @@ public class PickupManager : MonoBehaviour
     private Quaternion initialRotation;
     private float bounceIntensity = 0.2f;
 
+    public GameObject hitbox;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +33,8 @@ public class PickupManager : MonoBehaviour
         {
             float step = speed * Time.deltaTime;
             transform.position = Vector3.MoveTowards(transform.position, ball.transform.position, step);
+
+            acceleration += (acceleration * 3f * Time.deltaTime);
 
             speed += acceleration * Time.deltaTime;
 
@@ -62,6 +66,8 @@ public class PickupManager : MonoBehaviour
         transform.position = centerPosition;
         transform.localScale = defaultScale;
         transform.rotation = initialRotation;
+        acceleration = 50f;
+        speed = 5f;
         isPickedUp = false;
         collected = false;
         gameObject.GetComponent<MeshRenderer>().enabled = true;

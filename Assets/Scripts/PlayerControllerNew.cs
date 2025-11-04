@@ -1,7 +1,9 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using System.Collections.Generic;
 
 public class PlayerControllerNew : MonoBehaviour
 {
@@ -12,7 +14,7 @@ public class PlayerControllerNew : MonoBehaviour
     public float rotationSpeed = 1f;
 
     public GameObject ball;
-    public float ballThrowStrength = 5;
+    public float ballThrowStrength = 10;
 
     private Camera mainCamera;
     private CameraController cameraController;
@@ -25,6 +27,10 @@ public class PlayerControllerNew : MonoBehaviour
     private bool charging;
     private float chargePercentage;
 
+    public List<PetDetails> pets = new List<PetDetails>();
+    public GameObject petPrefab;
+    public Transform petFollowPoint;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -35,13 +41,24 @@ public class PlayerControllerNew : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ballController = ball.GetComponent<BallController>();
         cameraController = mainCamera.GetComponent<CameraController>();
-
-        new Vector3()
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            pets.Insert(0, new PetDetails(5, 1, "Red"));
+            SpawnPet();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Y)) 
+        {
+            pets.Insert(0, new PetDetails(50, 3, "Yellow"));
+            SpawnPet();
+        }
+
+
         // get movement direction
         Vector3 movement = Quaternion.Euler(0.0f, mainCamera.transform.eulerAngles.y, 0.0f) * new Vector3(movementX, 0.0f, movementY);
 
@@ -79,8 +96,15 @@ public class PlayerControllerNew : MonoBehaviour
         // throw the ball
         if (throwing)
         {
+            float totalThrowStrength = ballThrowStrength;
+
+            if (pets.Count > 0) 
+            {
+                totalThrowStrength += pets[0].Strength;
+            }
+
             Vector3 cameraForward = transform.forward;
-            Vector3 throwVector = cameraForward * ballThrowStrength * chargePercentage;
+            Vector3 throwVector = cameraForward * totalThrowStrength * chargePercentage;
             throwVector.y = 5f;
             //cameraForward.Normalize();
 
@@ -109,5 +133,20 @@ public class PlayerControllerNew : MonoBehaviour
     {
         pickupCount++;
         Debug.Log("Coins: " + pickupCount);
+    }
+
+    public void SpawnPet() 
+    {
+        GameObject[] activePets = GameObject.FindGameObjectsWithTag("Pet");
+
+        foreach (GameObject obj in activePets)
+        {
+            Destroy(obj);
+        }
+
+        GameObject newPet = Instantiate(petPrefab, transform.position, transform.rotation);
+        newPet.GetComponent<Pet>().details = pets[0];
+        newPet.GetComponent<Pet>().LoadMaterial();
+        newPet.GetComponent<Pet>().followPoint = petFollowPoint;
     }
 }

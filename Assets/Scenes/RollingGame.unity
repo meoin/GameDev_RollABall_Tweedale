@@ -5977,6 +5977,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
+--- !u!1 &524467776
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 524467777}
+  m_Layer: 0
+  m_Name: PetFollowPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &524467777
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 524467776}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.604, y: -0.196, z: -1.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1052070069}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &526820473
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11534,8 +11565,10 @@ MonoBehaviour:
   speed: 8
   rotationSpeed: 5
   ball: {fileID: 1663188836}
-  ballThrowStrength: 25
+  ballThrowStrength: 5
   chargeSlider: {fileID: 1851697190}
+  petPrefab: {fileID: 1516178168713447203, guid: ae3e22d05d5ecb34f97702620c719092, type: 3}
+  petFollowPoint: {fileID: 524467777}
 --- !u!136 &1052070066
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -11627,6 +11660,7 @@ Transform:
   m_Children:
   - {fileID: 330569477}
   - {fileID: 1683796171}
+  - {fileID: 524467777}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1052070070
@@ -17946,7 +17980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ballHoldPoint: {fileID: 330569477}
   holdingBall: 1
-  frictionPower: 0.5
+  frictionPower: 100
   loopDestination: {fileID: 1081128561}
 --- !u!54 &1663188842
 Rigidbody:
@@ -18824,6 +18858,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 75386813}
     m_Modifications:
+    - target: {fileID: 3282070062258783281, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 9.9394245
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282070062258783281, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.9569144
+      objectReference: {fileID: 0}
+    - target: {fileID: 3282070062258783281, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 4.7183475
+      objectReference: {fileID: 0}
     - target: {fileID: 5734832838334765297, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
       propertyPath: m_LocalScale.z
       value: 0.7515915
@@ -18872,7 +18918,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pickup
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8401969222046629630, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
