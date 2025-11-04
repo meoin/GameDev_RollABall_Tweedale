@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using TMPro;
 
 public class PlayerControllerNew : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class PlayerControllerNew : MonoBehaviour
     public GameObject petPrefab;
     public Transform petFollowPoint;
 
+    public TextMeshProUGUI coinText;
+    public TextMeshProUGUI strengthText;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -41,6 +45,7 @@ public class PlayerControllerNew : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         ballController = ball.GetComponent<BallController>();
         cameraController = mainCamera.GetComponent<CameraController>();
+        UpdateUI();
     }
 
     // Update is called once per frame
@@ -96,12 +101,7 @@ public class PlayerControllerNew : MonoBehaviour
         // throw the ball
         if (throwing)
         {
-            float totalThrowStrength = ballThrowStrength;
-
-            if (pets.Count > 0) 
-            {
-                totalThrowStrength += pets[0].Strength;
-            }
+            float totalThrowStrength = GetTotalStrength();
 
             Vector3 cameraForward = transform.forward;
             Vector3 throwVector = cameraForward * totalThrowStrength * chargePercentage;
@@ -133,6 +133,7 @@ public class PlayerControllerNew : MonoBehaviour
     {
         pickupCount++;
         Debug.Log("Coins: " + pickupCount);
+        UpdateUI();
     }
 
     public void SpawnPet() 
@@ -148,5 +149,25 @@ public class PlayerControllerNew : MonoBehaviour
         newPet.GetComponent<Pet>().details = pets[0];
         newPet.GetComponent<Pet>().LoadMaterial();
         newPet.GetComponent<Pet>().followPoint = petFollowPoint;
+
+        UpdateUI();
+    }
+
+    public void UpdateUI() 
+    {
+        coinText.text = "$" + pickupCount;
+        strengthText.text = "Str: " + GetTotalStrength();
+    }
+
+    private float GetTotalStrength() 
+    {
+        float totalThrowStrength = ballThrowStrength;
+
+        if (pets.Count > 0)
+        {
+            totalThrowStrength += pets[0].Strength;
+        }
+
+        return totalThrowStrength;
     }
 }
