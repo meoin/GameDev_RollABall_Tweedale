@@ -63,6 +63,12 @@ public class PickupManager : MonoBehaviour
 
     public void ResetPosition() 
     {
+        if (isPickedUp && !collected) 
+        {
+            player.GetComponent<PlayerControllerNew>().PickupObject();
+            collected = true;
+        }
+
         transform.position = centerPosition;
         transform.localScale = defaultScale;
         transform.rotation = initialRotation;

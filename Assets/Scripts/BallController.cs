@@ -44,7 +44,7 @@ public class BallController : MonoBehaviour
             //rb.useGravity = true;
             Vector3 velocity = rb.linearVelocity;
             float speed = rb.linearVelocity.magnitude;
-            rb.AddForce(velocity.normalized * -1 * frictionPower * Time.deltaTime);
+            rb.AddForce(velocity * -1 * frictionPower * Time.deltaTime);
             //Debug.Log($"Speed: {speed}");
             if ((speed < 1f && throwBufferTime <= 0) || transform.position.y < -5f || Input.GetKeyDown(KeyCode.R))
             {
