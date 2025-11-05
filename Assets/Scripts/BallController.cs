@@ -14,6 +14,7 @@ public class BallController : MonoBehaviour
     private CameraController camera;
 
     public GameObject loopDestination;
+    public PlayerControllerNew playerController;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,6 +49,7 @@ public class BallController : MonoBehaviour
             //Debug.Log($"Speed: {speed}");
             if ((speed < 1f && throwBufferTime <= 0) || transform.position.y < -5f || Input.GetKeyDown(KeyCode.R))
             {
+                playerController.pickupValue = 1;
                 rb.linearVelocity = new Vector3(0f, 0f, 0f);
                 holdingBall = true;
                 camera.target = camera.player;
@@ -74,6 +76,7 @@ public class BallController : MonoBehaviour
         {
             transform.position = loopDestination.transform.position;
             ReactivateAllCoins();
+            playerController.pickupValue = playerController.pickupValue * 2;
         }
     }
 

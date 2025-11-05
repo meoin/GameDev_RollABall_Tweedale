@@ -8,9 +8,8 @@ public class GachaPanel : MonoBehaviour
 {
     private int minPower;
     private int maxPower;
-    private int rarity;
-    private Sprite sprite;
-    private string petName;
+    private int minRarity;
+    private int maxRarity;
 
     private PetDetails pet;
 
@@ -23,10 +22,11 @@ public class GachaPanel : MonoBehaviour
     public TextMeshProUGUI strengthText;
     public Image spriteImage;
 
-    public void RunGacha(int rar, int minP, int maxP, GameObject shop) 
+    public void RunGacha(int minRar, int maxRar, int minP, int maxP, GameObject shop) 
     {
         currentShop = shop.GetComponent<Shop>();
-        rarity = rar;
+        minRarity = minRar;
+        maxRarity = maxRar;
         minPower = minP;
         maxPower = maxP;
 
@@ -58,20 +58,20 @@ public class GachaPanel : MonoBehaviour
 
     private void PlayGachaPull()
     {
-        int rand = GetRandomNumber();
-        string color = GetRandomColor(rand);
-        int power = GetRandomStrength(rand);
+        int rarity = GetRarity();
+        string color = GetRandomColor(rarity);
+        int power = GetRandomStrength(rarity);
         string name = petNameGenerator.GetName();
 
         pet = new PetDetails(name, power, rarity, color);
     }
 
-    private int GetRandomNumber()
+    private int GetRarity()
     {
-        int minValue = 0 + (rarity * 2);
-        int maxValue = 3 + (rarity * 3);
+        int valueOne = Random.Range(minRarity, maxRarity+1);
+        int valueTwo = Random.Range(minRarity, maxRarity+1);
 
-        int randomValue = Random.Range(minValue, maxValue);
+        int randomValue = Mathf.Min(valueOne, valueTwo);
 
         return randomValue;
     }

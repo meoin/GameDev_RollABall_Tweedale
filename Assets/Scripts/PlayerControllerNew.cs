@@ -22,6 +22,7 @@ public class PlayerControllerNew : MonoBehaviour
     private BallController ballController;
 
     private int pickupCount;
+    public int pickupValue = 1;
 
     public Slider chargeSlider;
     private bool throwing;
@@ -139,8 +140,8 @@ public class PlayerControllerNew : MonoBehaviour
 
     public void PickupObject()
     {
-        pickupCount++;
-        Debug.Log("Coins: " + pickupCount);
+        pickupCount = Mathf.Min(pickupCount + pickupValue, int.MaxValue);
+        //Debug.Log("Coins: " + pickupCount);
         UpdateUI();
     }
 
@@ -153,10 +154,14 @@ public class PlayerControllerNew : MonoBehaviour
             Destroy(obj);
         }
 
-        GameObject newPet = Instantiate(petPrefab, transform.position, transform.rotation);
-        newPet.GetComponent<Pet>().details = inventoryManager.inventory[0];
-        newPet.GetComponent<Pet>().LoadMaterial();
-        newPet.GetComponent<Pet>().followPoint = petFollowPoint;
+        if (inventoryManager.inventory[0] != null) 
+        {
+            GameObject newPet = Instantiate(petPrefab, transform.position, transform.rotation);
+            newPet.GetComponent<Pet>().details = inventoryManager.inventory[0];
+            newPet.GetComponent<Pet>().LoadMaterial();
+            newPet.GetComponent<Pet>().followPoint = petFollowPoint;
+        }
+        
 
         UpdateUI();
     }

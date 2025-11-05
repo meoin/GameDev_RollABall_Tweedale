@@ -5,7 +5,8 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     public int price;
-    public int rarity;
+    public int minRarity;
+    public int maxRarity;
     public int minPower;
     public int maxPower;
 
@@ -38,7 +39,7 @@ public class Shop : MonoBehaviour
 
             ToggleBuyIcon(false);
             gachaPanel.gameObject.SetActive(true);
-            gachaPanel.RunGacha(rarity, minPower, maxPower, gameObject);
+            gachaPanel.RunGacha(minRarity, maxRarity, minPower, maxPower, gameObject);
 
             playerController.paused = true;
             Cursor.lockState = CursorLockMode.None;
