@@ -31,6 +31,8 @@ public class PlayerControllerNew : MonoBehaviour
     
     public GameObject petPrefab;
     public Transform petFollowPoint;
+    public Transform petFollowPointTwo;
+    public Transform petFollowPointThree;
 
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI strengthText;
@@ -161,7 +163,23 @@ public class PlayerControllerNew : MonoBehaviour
             newPet.GetComponent<Pet>().LoadMaterial();
             newPet.GetComponent<Pet>().followPoint = petFollowPoint;
         }
-        
+
+        if (inventoryManager.inventory[1] != null)
+        {
+            GameObject newPet = Instantiate(petPrefab, transform.position, transform.rotation);
+            newPet.GetComponent<Pet>().details = inventoryManager.inventory[1];
+            newPet.GetComponent<Pet>().LoadMaterial();
+            newPet.GetComponent<Pet>().followPoint = petFollowPointTwo;
+        }
+
+        if (inventoryManager.inventory[2] != null)
+        {
+            GameObject newPet = Instantiate(petPrefab, transform.position, transform.rotation);
+            newPet.GetComponent<Pet>().details = inventoryManager.inventory[2];
+            newPet.GetComponent<Pet>().LoadMaterial();
+            newPet.GetComponent<Pet>().followPoint = petFollowPointThree;
+        }
+
 
         UpdateUI();
     }
@@ -179,6 +197,16 @@ public class PlayerControllerNew : MonoBehaviour
         if (inventoryManager.inventory[0] != null)
         {
             totalThrowStrength += inventoryManager.inventory[0].Strength;
+        }
+
+        if (inventoryManager.inventory[1] != null)
+        {
+            totalThrowStrength += inventoryManager.inventory[1].Strength;
+        }
+
+        if (inventoryManager.inventory[2] != null)
+        {
+            totalThrowStrength += inventoryManager.inventory[2].Strength;
         }
 
         return totalThrowStrength;

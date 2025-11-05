@@ -7251,7 +7251,7 @@ GameObject:
   m_Layer: 0
   m_Name: PetFollowPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -11495,6 +11495,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5734832838334765297, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
   m_PrefabInstance: {fileID: 1559979678}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &875646070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 875646071}
+  m_Layer: 0
+  m_Name: PetFollowPoint (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &875646071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 875646070}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.06, y: -0.196, z: -2.033}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1052070069}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &886541808 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5734832838334765297, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
@@ -13776,6 +13807,8 @@ MonoBehaviour:
   chargeSlider: {fileID: 1851697190}
   petPrefab: {fileID: 1516178168713447203, guid: ae3e22d05d5ecb34f97702620c719092, type: 3}
   petFollowPoint: {fileID: 524467777}
+  petFollowPointTwo: {fileID: 1370227621}
+  petFollowPointThree: {fileID: 875646071}
   coinText: {fileID: 1353272625}
   strengthText: {fileID: 1976993525}
   inventoryManager: {fileID: 366372370}
@@ -13873,6 +13906,8 @@ Transform:
   - {fileID: 330569477}
   - {fileID: 1683796171}
   - {fileID: 524467777}
+  - {fileID: 1370227621}
+  - {fileID: 875646071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1052070070
@@ -17969,6 +18004,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
+--- !u!1 &1370227620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1370227621}
+  m_Layer: 0
+  m_Name: PetFollowPoint (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1370227621
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370227620}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.699, y: -0.196, z: -1.47}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1052070069}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1376532152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5734832838334765297, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
