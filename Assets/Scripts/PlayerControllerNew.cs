@@ -56,13 +56,13 @@ public class PlayerControllerNew : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            inventoryManager.inventory.Insert(0, new PetDetails(5, 1, "Red"));
+            inventoryManager.AddPetToInventory(new PetDetails("Goobert", 5, 1, "Red"));
             SpawnPet();
         }
 
         if (Input.GetKeyDown(KeyCode.Y)) 
         {
-            inventoryManager.inventory.Insert(0, new PetDetails(50, 3, "Yellow"));
+            inventoryManager.AddPetToInventory(new PetDetails("Yellert", 50, 3, "Yellow"));
             SpawnPet();
         }
 
@@ -171,7 +171,7 @@ public class PlayerControllerNew : MonoBehaviour
     {
         float totalThrowStrength = ballThrowStrength;
 
-        if (inventoryManager.inventory.Count > 0)
+        if (inventoryManager.inventory[0] != null)
         {
             totalThrowStrength += inventoryManager.inventory[0].Strength;
         }
@@ -184,6 +184,7 @@ public class PlayerControllerNew : MonoBehaviour
         if (!inventoryCanvas.activeSelf)
         {
             inventoryCanvas.SetActive(true);
+            inventoryManager.PopulateGrid();
             Time.timeScale = 0;
             paused = true;
             Cursor.lockState = CursorLockMode.None;
@@ -191,17 +192,14 @@ public class PlayerControllerNew : MonoBehaviour
         }
         else
         {
-            GameObject[] inventoryItems = GameObject.FindGameObjectsWithTag("InventoryItem");
-            foreach (GameObject item in inventoryItems)
-            {
-                item.GetComponent<InventoryItem>().ReturnToParent();
-            }
-
+            inventoryManager.ClearGrid();
             inventoryCanvas.SetActive(false);
             Time.timeScale = 1;
             paused = false;
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+
+            SpawnPet();
         }
     }
 }

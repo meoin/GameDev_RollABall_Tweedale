@@ -8,6 +8,7 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 {
     public Image image;
     public PetDetails details;
+    public int listIndex;
     [HideInInspector] public InventoryManager inventoryManager;
 
     [HideInInspector] public Transform parentAfterDrag;
@@ -61,7 +62,11 @@ public class InventoryItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         itemDetails.transform.SetAsLastSibling();
         itemDetails.SetActive(true);
 
-        detailsText.text = $"Name\n\nSTR: 5";
+        if (details != null) 
+        {
+            detailsText.text = $"{details.Name}\n\nSTR: {details.Strength}";
+        }
+        
     }
 
     public void OnPointerExit(PointerEventData eventData)

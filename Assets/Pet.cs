@@ -2,12 +2,14 @@ using UnityEngine;
 
 public class PetDetails 
 {
+    public string Name;
     public float Strength = 1f;
     public int Rarity = 1;
     public string Material;
 
-    public PetDetails(float strength, int rarity, string material) 
+    public PetDetails(string name, float strength, int rarity, string material) 
     {
+        Name = name;
         Strength = strength;
         Rarity = rarity;
         Material = material;
