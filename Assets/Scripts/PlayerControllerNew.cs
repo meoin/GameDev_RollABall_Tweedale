@@ -27,13 +27,16 @@ public class PlayerControllerNew : MonoBehaviour
     private bool throwing;
     private bool charging;
     private float chargePercentage;
-
-    public List<PetDetails> pets = new List<PetDetails>();
+    
     public GameObject petPrefab;
     public Transform petFollowPoint;
 
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI strengthText;
+
+    public InventoryManager inventoryManager;
+    public GameObject inventoryCanvas;
+    private bool paused;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -53,14 +56,19 @@ public class PlayerControllerNew : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            pets.Insert(0, new PetDetails(5, 1, "Red"));
+            inventoryManager.inventory.Insert(0, new PetDetails(5, 1, "Red"));
             SpawnPet();
         }
 
         if (Input.GetKeyDown(KeyCode.Y)) 
         {
-            pets.Insert(0, new PetDetails(50, 3, "Yellow"));
+            inventoryManager.inventory.Insert(0, new PetDetails(50, 3, "Yellow"));
             SpawnPet();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I)) 
+        {
+            ToggleInventory();
         }
 
 
@@ -77,7 +85,7 @@ public class PlayerControllerNew : MonoBehaviour
         // move player based on movement direction & speed
         rb.linearVelocity = movement * speed;
 
-        if (ballController.holdingBall)
+        if (ballController.holdingBall && !paused)
         {
             if (Input.GetMouseButton(0))
             {
@@ -146,7 +154,7 @@ public class PlayerControllerNew : MonoBehaviour
         }
 
         GameObject newPet = Instantiate(petPrefab, transform.position, transform.rotation);
-        newPet.GetComponent<Pet>().details = pets[0];
+        newPet.GetComponent<Pet>().details = inventoryManager.inventory[0];
         newPet.GetComponent<Pet>().LoadMaterial();
         newPet.GetComponent<Pet>().followPoint = petFollowPoint;
 
@@ -163,11 +171,37 @@ public class PlayerControllerNew : MonoBehaviour
     {
         float totalThrowStrength = ballThrowStrength;
 
-        if (pets.Count > 0)
+        if (inventoryManager.inventory.Count > 0)
         {
-            totalThrowStrength += pets[0].Strength;
+            totalThrowStrength += inventoryManager.inventory[0].Strength;
         }
 
         return totalThrowStrength;
+    }
+
+    public void ToggleInventory()
+    {
+        if (!inventoryCanvas.activeSelf)
+        {
+            inventoryCanvas.SetActive(true);
+            Time.timeScale = 0;
+            paused = true;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+        }
+        else
+        {
+            GameObject[] inventoryItems = GameObject.FindGameObjectsWithTag("InventoryItem");
+            foreach (GameObject item in inventoryItems)
+            {
+                item.GetComponent<InventoryItem>().ReturnToParent();
+            }
+
+            inventoryCanvas.SetActive(false);
+            Time.timeScale = 1;
+            paused = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
     }
 }

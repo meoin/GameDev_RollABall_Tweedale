@@ -10,6 +10,7 @@ TagManager:
   - Ball
   - Portal
   - Pet
+  - InventoryItem
   layers:
   - Default
   - TransparentFX
