@@ -41,11 +41,19 @@ public class PlayerControllerNew : MonoBehaviour
     public GameObject inventoryCanvas;
     public bool paused;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void StartGame() 
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        Time.timeScale = 1;
+        paused = false;
+    }
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        paused = true;
+        Time.timeScale = 0;
 
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();
