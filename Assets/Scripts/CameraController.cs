@@ -7,6 +7,7 @@ public class CameraController : MonoBehaviour
     public Transform target;
     public Transform player;
     public Transform ball;
+    public PlayerControllerNew playerController;
     private float distanceToPlayer;
     private Vector2 input;
 

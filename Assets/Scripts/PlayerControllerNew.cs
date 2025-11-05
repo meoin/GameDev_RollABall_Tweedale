@@ -36,7 +36,7 @@ public class PlayerControllerNew : MonoBehaviour
 
     public InventoryManager inventoryManager;
     public GameObject inventoryCanvas;
-    private bool paused;
+    public bool paused;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -201,5 +201,32 @@ public class PlayerControllerNew : MonoBehaviour
 
             SpawnPet();
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Shop"))
+        {
+            other.gameObject.GetComponent<Shop>().ToggleBuyIcon(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Shop"))
+        {
+            other.gameObject.GetComponent<Shop>().ToggleBuyIcon(false);
+        }
+    }
+
+    public int Cash() 
+    {
+        return pickupCount;
+    }
+
+    public void SpendMoney(int charge) 
+    {
+        pickupCount -= charge;
+        UpdateUI();
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - Portal
   - Pet
   - InventoryItem
+  - Shop
   layers:
   - Default
   - TransparentFX
