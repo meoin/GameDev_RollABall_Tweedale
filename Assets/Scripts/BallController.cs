@@ -4,6 +4,7 @@ using UnityEngine.UIElements;
 public class BallController : MonoBehaviour
 {
     public Transform ballHoldPoint;
+    public Transform ballThrowPoint;
     public bool holdingBall;
     private Rigidbody rb;
     public float frictionPower = 0.1f;
@@ -35,6 +36,7 @@ public class BallController : MonoBehaviour
         }
         else if (ballThrow) 
         {
+            transform.position = ballThrowPoint.position;
             rb.AddForce(throwVector, ForceMode.Impulse);
             ballThrow = false;
         }

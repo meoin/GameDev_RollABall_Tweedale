@@ -24,6 +24,7 @@ public class PlayerControllerNew : MonoBehaviour
     private int pickupCount;
     public int pickupValue = 1;
 
+    public GameObject aimArrow;
     public Slider chargeSlider;
     private bool throwing;
     private bool charging;
@@ -102,6 +103,7 @@ public class PlayerControllerNew : MonoBehaviour
             {
                 charging = true;
                 chargeSlider.gameObject.SetActive(true);
+                aimArrow.SetActive(true);
 
                 chargePercentage = Mathf.Sin(Time.time * 3) + 1;
                 //Debug.Log($"Charge: {chargePercentage}");
@@ -114,6 +116,7 @@ public class PlayerControllerNew : MonoBehaviour
                 charging = false;
                 throwing = true;
                 chargeSlider.gameObject.SetActive(false);
+                aimArrow.SetActive(false);
             }
         }
 
