@@ -53,6 +53,7 @@ public class BallController : MonoBehaviour
             {
                 playerController.pickupValue = 1;
                 rb.linearVelocity = new Vector3(0f, 0f, 0f);
+                transform.position = ballHoldPoint.position;
                 holdingBall = true;
                 camera.target = camera.player;
                 ReactivateAllCoins();
