@@ -95,7 +95,10 @@ public class PlayerControllerNew : MonoBehaviour
         }
 
         // move player based on movement direction & speed
-        rb.linearVelocity = movement * speed;
+        if (ballController.holdingBall) 
+        {
+            rb.linearVelocity = movement * speed;
+        }
 
         if (ballController.holdingBall && !paused)
         {

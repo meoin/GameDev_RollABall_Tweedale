@@ -11,6 +11,7 @@ public class BallController : MonoBehaviour
     private bool ballThrow;
     private Vector3 throwVector;
     private float throwBufferTime = 2;
+    public float pushStrength = 1f;
 
     private CameraController camera;
 
@@ -43,6 +44,17 @@ public class BallController : MonoBehaviour
         else
         {
             if (throwBufferTime > 0) throwBufferTime -= Time.deltaTime;
+
+            if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) 
+            {
+                Vector3 pushVector = new Vector3(-1f, 0f, 0f) * pushStrength;
+                rb.AddForce(pushVector * Time.deltaTime);
+            }
+            if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+            {
+                Vector3 pushVector = new Vector3(1f, 0f, 0f) * pushStrength;
+                rb.AddForce(pushVector * Time.deltaTime);
+            }
 
             //rb.useGravity = true;
             Vector3 velocity = rb.linearVelocity;
