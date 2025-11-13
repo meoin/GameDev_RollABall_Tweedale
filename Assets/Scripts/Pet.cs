@@ -4,10 +4,10 @@ public class PetDetails
 {
     public string Name;
     public float Strength = 1f;
-    public int Rarity = 1;
+    public float Rarity = 1;
     public string Material;
 
-    public PetDetails(string name, float strength, int rarity, string material) 
+    public PetDetails(string name, float strength, float rarity, string material) 
     {
         Name = name;
         Strength = strength;

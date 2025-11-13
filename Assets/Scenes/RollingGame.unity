@@ -3943,8 +3943,8 @@ Transform:
   m_GameObject: {fileID: 267202800}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 13.1, y: 12.8, z: 118.47}
-  m_LocalScale: {x: 21.875, y: 48.421207, z: 254.69496}
+  m_LocalPosition: {x: 35.5, y: 12.8, z: 118.47}
+  m_LocalScale: {x: 66.65151, y: 48.421207, z: 254.69496}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1876439619}
@@ -5912,6 +5912,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
+      propertyPath: shopIndex
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: gachaPanel
       value: 
       objectReference: {fileID: 1591207911}
@@ -7469,8 +7473,8 @@ Transform:
   m_GameObject: {fileID: 499105513}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.2, y: 12.8, z: 118.47}
-  m_LocalScale: {x: 21.875, y: 48.421207, z: 254.69496}
+  m_LocalPosition: {x: -43.6, y: 12.8, z: 118.47}
+  m_LocalScale: {x: 66.65151, y: 56.125023, z: 295.21695}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1876439619}
@@ -8631,8 +8635,8 @@ Transform:
   m_GameObject: {fileID: 577496256}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.0995483, y: 15.4, z: 281.03}
-  m_LocalScale: {x: 53.503895, y: 29.521454, z: 68.665}
+  m_LocalPosition: {x: -4.0995483, y: 15.4, z: 327.3}
+  m_LocalScale: {x: 126.80422, y: 69.96584, z: 162.73604}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1876439619}
@@ -8665,7 +8669,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577496256}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -14848,10 +14852,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4218793d0d32d438504d3b668de847, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 8
-  rotationSpeed: 5
+  speed: 15
+  rotationSpeed: 10
   ball: {fileID: 1663188836}
-  ballThrowStrength: 5
+  ballThrowStrength: 50
   pickupValue: 1
   aimArrow: {fileID: 2015365789}
   chargeSlider: {fileID: 1851697190}
@@ -15711,6 +15715,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: minRarity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
+      propertyPath: shopIndex
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
@@ -20345,6 +20353,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
+      propertyPath: shopIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: gachaPanel
       value: 
       objectReference: {fileID: 1591207911}
@@ -22537,6 +22549,7 @@ GameObject:
   - component: {fileID: 1591207914}
   - component: {fileID: 1591207911}
   - component: {fileID: 1591207913}
+  - component: {fileID: 1591207917}
   m_Layer: 5
   m_Name: GachaPanel
   m_TagString: Untagged
@@ -22558,6 +22571,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inventoryManager: {fileID: 366372370}
   petNameGenerator: {fileID: 1591207913}
+  petRegistry: {fileID: 1591207917}
   player: {fileID: 1052070065}
   nameText: {fileID: 899884268}
   strengthText: {fileID: 1608280585}
@@ -22651,6 +22665,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1591207910}
   m_CullTransparentMesh: 1
+--- !u!114 &1591207917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1591207910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5815e82df148c1c43963fba0d837276e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1593596783 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5970045409078641151, guid: 5d58336982ea86b4c8518529442d081d, type: 3}
@@ -23502,6 +23528,7 @@ MonoBehaviour:
   ballThrowPoint: {fileID: 275549199}
   holdingBall: 1
   frictionPower: 15
+  pushStrength: 200
   loopDestination: {fileID: 1081128561}
   playerController: {fileID: 1052070065}
 --- !u!54 &1663188842
@@ -27655,7 +27682,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2015365790
 Transform:
   m_ObjectHideFlags: 0
@@ -27665,8 +27692,8 @@ Transform:
   m_GameObject: {fileID: 2015365789}
   serializedVersion: 2
   m_LocalRotation: {x: -0.5, y: 0.5, z: -0.5, w: -0.5}
-  m_LocalPosition: {x: 0, y: -0.719, z: 1.95}
-  m_LocalScale: {x: 0.21113326, y: 0.21113326, z: 0.21113326}
+  m_LocalPosition: {x: 0, y: -0.024, z: 2.696}
+  m_LocalScale: {x: 0.29510096, y: 0.29510096, z: 0.29510096}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1052070069}
@@ -29536,6 +29563,10 @@ PrefabInstance:
     - target: {fileID: 3747076675980729225, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: m_Name
       value: ShopParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
+      propertyPath: minPower
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: maxRarity

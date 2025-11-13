@@ -9,6 +9,7 @@ public class Shop : MonoBehaviour
     public int maxRarity;
     public int minPower;
     public int maxPower;
+    public int shopIndex;
 
     public TextMeshPro priceText;
     public GameObject buyIcon;
@@ -39,7 +40,7 @@ public class Shop : MonoBehaviour
 
             ToggleBuyIcon(false);
             gachaPanel.gameObject.SetActive(true);
-            gachaPanel.RunGacha(minRarity, maxRarity, minPower, maxPower, gameObject);
+            gachaPanel.RunGacha(shopIndex, gameObject);
 
             playerController.paused = true;
             Cursor.lockState = CursorLockMode.None;

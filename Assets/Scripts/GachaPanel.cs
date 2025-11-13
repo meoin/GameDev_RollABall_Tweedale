@@ -10,11 +10,13 @@ public class GachaPanel : MonoBehaviour
     private int maxPower;
     private int minRarity;
     private int maxRarity;
+    private int shopIndex;
 
     private PetDetails pet;
 
     public InventoryManager inventoryManager;
     public PetNameGenerator petNameGenerator;
+    public PetRegistry petRegistry;
     public PlayerControllerNew player;
     private Shop currentShop;
 
@@ -22,13 +24,10 @@ public class GachaPanel : MonoBehaviour
     public TextMeshProUGUI strengthText;
     public Image spriteImage;
 
-    public void RunGacha(int minRar, int maxRar, int minP, int maxP, GameObject shop) 
+    public void RunGacha(int sIndex, GameObject shop) 
     {
         currentShop = shop.GetComponent<Shop>();
-        minRarity = minRar;
-        maxRarity = maxRar;
-        minPower = minP;
-        maxPower = maxP;
+        shopIndex = sIndex;
 
         PlayGachaPull();
 
@@ -58,12 +57,26 @@ public class GachaPanel : MonoBehaviour
 
     private void PlayGachaPull()
     {
-        int rarity = GetRarity();
-        string color = GetRandomColor(rarity);
-        int power = GetRandomStrength(rarity);
-        string name = petNameGenerator.GetName();
+        float pullNumber = Random.value * 100;
 
-        pet = new PetDetails(name, power, rarity, color);
+        Debug.Log("Pull number: " + pullNumber);
+
+        float currentWeight = 0f;
+
+        for (int i = 0; i < 5; i++) 
+        {
+            if (pullNumber <= petRegistry.allPets[shopIndex, i].Rarity + currentWeight)
+            {
+                pet = petRegistry.allPets[shopIndex, i];
+                break;
+            }
+            else
+            {
+                currentWeight += petRegistry.allPets[shopIndex, i].Rarity;
+            }
+        }
+
+
     }
 
     private int GetRarity()

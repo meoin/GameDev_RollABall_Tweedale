@@ -129,7 +129,7 @@ public class PlayerControllerNew : MonoBehaviour
             float totalThrowStrength = GetTotalStrength();
 
             Vector3 cameraForward = transform.forward;
-            Vector3 throwVector = cameraForward * totalThrowStrength * chargePercentage;
+            Vector3 throwVector = cameraForward * (totalThrowStrength / 10)* chargePercentage;
             throwVector.y = 5f;
             //cameraForward.Normalize();
 
