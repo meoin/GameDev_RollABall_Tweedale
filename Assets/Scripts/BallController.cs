@@ -18,9 +18,18 @@ public class BallController : MonoBehaviour
     public GameObject loopDestination;
     public PlayerControllerNew playerController;
 
+    public ParticleSystem particles;
+
+    private AudioSource sfx;
+    public AudioClip blingSfx;
+    private float pitchIncrease = 1f;
+    private int consecutiveCoins = 0;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        sfx = GetComponent<AudioSource>();
+        particles.Pause();
         rb = GetComponent<Rigidbody>();
         camera = Camera.main.GetComponent<CameraController>();
     }
@@ -40,11 +49,13 @@ public class BallController : MonoBehaviour
             transform.position = ballThrowPoint.position;
             rb.AddForce(throwVector, ForceMode.Impulse);
             ballThrow = false;
+            particles.Play();
         }
         else
         {
             if (throwBufferTime > 0) throwBufferTime -= Time.deltaTime;
 
+            // Ball movement:
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) 
             {
                 Vector3 pushVector = new Vector3(-1f, 0f, 0f) * pushStrength;
@@ -60,15 +71,37 @@ public class BallController : MonoBehaviour
             Vector3 velocity = rb.linearVelocity;
             float speed = rb.linearVelocity.magnitude;
             rb.AddForce(velocity * -1 * frictionPower * Time.deltaTime);
-            //Debug.Log($"Speed: {speed}");
+
+            Debug.Log("Speed: " + speed);
+            //Particles:
+            var main = particles.main;
+            main.startSpeed = Mathf.Clamp(speed/10, 10, 100);
+            float xSize = Mathf.Clamp(speed / 500, 0, 5);
+
+            if (xSize > 0.2f) main.startSizeX = xSize;
+            else main.startSizeX = 0f;
+
+                float redness = 1f - Mathf.Min(speed / 100, 1f);
+            Color secondColor = new Color(1f, redness, redness);
+            main.startColor = new ParticleSystem.MinMaxGradient(Color.white, secondColor);
+
+            //Ball return to player:
             if ((speed < 1f && throwBufferTime <= 0) || transform.position.y < -5f || Input.GetKeyDown(KeyCode.R))
             {
+                consecutiveCoins = 0;
+                pitchIncrease = 1f;
+                particles.Clear();
+                particles.Pause();
                 playerController.pickupValue = 1;
                 rb.linearVelocity = new Vector3(0f, 0f, 0f);
                 transform.position = ballHoldPoint.position;
                 holdingBall = true;
                 camera.target = camera.player;
                 ReactivateAllCoins();
+            }
+            else if (transform.position.z > 315) 
+            {
+                Loop();
             }
         }
     }
@@ -85,21 +118,30 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickupHitbox"))
         {
+            sfx.pitch = pitchIncrease;
+            sfx.PlayOneShot(blingSfx);
+            consecutiveCoins += 1;
+            pitchIncrease = Mathf.Min(pitchIncrease + (0.1f/Mathf.Max(consecutiveCoins/2, 1)), 5f);
             other.gameObject.GetComponentInParent<PickupManager>().isPickedUp = true;
         }
         else if (other.gameObject.CompareTag("Portal"))
         {
-            transform.position = loopDestination.transform.position;
-            ReactivateAllCoins();
-            playerController.pickupValue = playerController.pickupValue * 2;
+            Loop();
         }
+    }
+
+    private void Loop() 
+    {
+        transform.position = loopDestination.transform.position;
+        ReactivateAllCoins();
+        playerController.pickupValue = playerController.pickupValue * 2;
     }
 
     private void ReactivateAllCoins() 
     {
         GameObject[] pickups = GameObject.FindGameObjectsWithTag("Pickup");
 
-        Debug.Log("Pickups: " + pickups.Length);
+        //Debug.Log("Pickups: " + pickups.Length);
 
         // Iterate through the array and activate each GameObject
         foreach (GameObject obj in pickups)

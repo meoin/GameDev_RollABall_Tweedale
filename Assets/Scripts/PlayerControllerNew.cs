@@ -68,7 +68,7 @@ public class PlayerControllerNew : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            inventoryManager.AddPetToInventory(new PetDetails("Goobert", 5, 1, "Red"));
+            inventoryManager.AddPetToInventory(new PetDetails("Goobert", 500, 1, "Red"));
             SpawnPet();
         }
 

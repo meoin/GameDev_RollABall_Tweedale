@@ -5,10 +5,6 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     public int price;
-    public int minRarity;
-    public int maxRarity;
-    public int minPower;
-    public int maxPower;
     public int shopIndex;
 
     public TextMeshPro priceText;
