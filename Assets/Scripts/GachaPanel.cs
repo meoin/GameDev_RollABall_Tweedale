@@ -24,6 +24,8 @@ public class GachaPanel : MonoBehaviour
     public TextMeshProUGUI strengthText;
     public Image spriteImage;
 
+    private bool firstPull = true;
+
     public void RunGacha(int sIndex, GameObject shop) 
     {
         currentShop = shop.GetComponent<Shop>();
@@ -58,6 +60,12 @@ public class GachaPanel : MonoBehaviour
     private void PlayGachaPull()
     {
         float pullNumber = Random.value * 100;
+
+        if (firstPull) 
+        {
+            firstPull = false;
+            pullNumber = 100f;
+        }
 
         Debug.Log("Pull number: " + pullNumber);
 

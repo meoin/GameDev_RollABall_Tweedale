@@ -73,17 +73,36 @@ public class BallController : MonoBehaviour
             rb.AddForce(velocity * -1 * frictionPower * Time.deltaTime);
 
             Debug.Log("Speed: " + speed);
+
             //Particles:
             var main = particles.main;
-            main.startSpeed = Mathf.Clamp(speed/10, 10, 100);
-            float xSize = Mathf.Clamp(speed / 500, 0, 5);
+            var shape = particles.shape;
+            //speed
+            main.startSpeed = Mathf.Clamp(speed/5, 15, 100);
 
+            //width
+            float xSize = Mathf.Clamp(speed/100, 0, 5);
             if (xSize > 0.2f) main.startSizeX = xSize;
             else main.startSizeX = 0f;
 
-                float redness = 1f - Mathf.Min(speed / 100, 1f);
-            Color secondColor = new Color(1f, redness, redness);
-            main.startColor = new ParticleSystem.MinMaxGradient(Color.white, secondColor);
+            //color
+            float firstRedness = 1f - Mathf.Min(speed / 500, 1f);
+            Color firstColor = new Color(1f, firstRedness, firstRedness);
+
+            Color secondColor = Color.white;
+            if (speed / 500 > 1f) 
+            {
+                float secondRedness = 1f - Mathf.Min(speed / 2000, 1f);
+                secondColor = new Color(1f, secondRedness, secondRedness);
+                firstColor = new Color(secondRedness, firstRedness, firstRedness);
+            }
+
+            
+            main.startColor = new ParticleSystem.MinMaxGradient(firstColor, secondColor);
+
+            //angle
+            float angle = Mathf.Clamp(speed / 5, 0, 40);
+            shape.angle = angle;
 
             //Ball return to player:
             if ((speed < 1f && throwBufferTime <= 0) || transform.position.y < -5f || Input.GetKeyDown(KeyCode.R))

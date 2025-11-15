@@ -78,6 +78,12 @@ public class PlayerControllerNew : MonoBehaviour
             SpawnPet();
         }
 
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            inventoryManager.AddPetToInventory(new PetDetails("Demon", 5000, 3, "Black"));
+            SpawnPet();
+        }
+
         if (Input.GetKeyDown(KeyCode.I)) 
         {
             ToggleInventory();
@@ -87,16 +93,17 @@ public class PlayerControllerNew : MonoBehaviour
         // get movement direction
         Vector3 movement = Quaternion.Euler(0.0f, mainCamera.transform.eulerAngles.y, 0.0f) * new Vector3(movementX, 0.0f, movementY);
 
-        // rotate player if movement isnt zero
-        if (movement != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-        }
-
-        // move player based on movement direction & speed
+        // only move and rotate if holding ball
         if (ballController.holdingBall) 
         {
+            // rotate player if movement isnt zero
+            if (movement != Vector3.zero)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(movement.normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
+
+            // move player based on movement direction & speed
             rb.linearVelocity = movement * speed;
         }
 
@@ -200,8 +207,30 @@ public class PlayerControllerNew : MonoBehaviour
 
     public void UpdateUI() 
     {
-        coinText.text = "$" + pickupCount;
-        strengthText.text = "Str: " + GetTotalStrength();
+        if (pickupCount < 1000)
+        {
+            coinText.text = "$" + pickupCount;
+        }
+        else if (pickupCount < 1000000)
+        {
+            float truncatedCoins = pickupCount / 1000;
+            coinText.text = "$" + truncatedCoins.ToString("F1") + "k";
+        }
+        else 
+        {
+            float truncatedCoins = pickupCount / 1000000;
+            coinText.text = "$" + truncatedCoins.ToString("F1") + "m";
+        }
+
+        if (GetTotalStrength() < 1000)
+        {
+            strengthText.text = "Str: " + GetTotalStrength();
+        }
+        else
+        {
+            float truncatedStrength = GetTotalStrength() / 1000;
+            strengthText.text = "$" + truncatedStrength.ToString("F1") + "k";
+        }
     }
 
     private float GetTotalStrength() 
