@@ -229,7 +229,7 @@ public class PlayerControllerNew : MonoBehaviour
         else
         {
             float truncatedStrength = GetTotalStrength() / 1000;
-            strengthText.text = "$" + truncatedStrength.ToString("F1") + "k";
+            strengthText.text = "Str:" + truncatedStrength.ToString("F1") + "k";
         }
     }
 
