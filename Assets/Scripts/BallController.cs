@@ -25,6 +25,8 @@ public class BallController : MonoBehaviour
     private float pitchIncrease = 1f;
     private int consecutiveCoins = 0;
 
+    public GameObject coinPickupPrefab;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -137,11 +139,8 @@ public class BallController : MonoBehaviour
     {
         if (other.gameObject.CompareTag("PickupHitbox"))
         {
-            sfx.pitch = pitchIncrease;
-            sfx.PlayOneShot(blingSfx);
-            consecutiveCoins += 1;
-            pitchIncrease = Mathf.Min(pitchIncrease + (0.1f/Mathf.Max(consecutiveCoins/2, 1)), 5f);
             other.gameObject.GetComponentInParent<PickupManager>().isPickedUp = true;
+            PickupEffects();
         }
         else if (other.gameObject.CompareTag("Portal"))
         {
@@ -167,5 +166,21 @@ public class BallController : MonoBehaviour
         {
             obj.GetComponent<PickupManager>().ResetPosition();
         }
+    }
+
+    public void PickupEffects() 
+    {
+        sfx.pitch = pitchIncrease;
+        sfx.PlayOneShot(blingSfx);
+        consecutiveCoins += 1;
+        pitchIncrease = Mathf.Min(pitchIncrease + (0.1f / Mathf.Max(consecutiveCoins / 2, 1)), 5f);
+
+        CoinPopupText();
+    }
+
+    private void CoinPopupText() 
+    {
+        GameObject popup = Instantiate(coinPickupPrefab, transform.position, transform.rotation);
+        popup.GetComponent<CoinTextPopup>().Initialize(playerController.pickupValue, transform);
     }
 }

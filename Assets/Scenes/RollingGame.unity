@@ -21974,7 +21974,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20.3, y: -22}
+  m_AnchoredPosition: {x: 20.300049, y: -22}
   m_SizeDelta: {x: 692.7427, y: 75.0517}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1353272625
@@ -31550,6 +31550,7 @@ MonoBehaviour:
   playerController: {fileID: 1052070065}
   particles: {fileID: 1445443755}
   blingSfx: {fileID: 8300000, guid: f767580bbf15cdb479f6e210ac8edbce, type: 3}
+  coinPickupPrefab: {fileID: 2950794576533833131, guid: 255fc3c302cb4b046ba15a9ea77fb741, type: 3}
 --- !u!54 &1663188842
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31590,7 +31591,7 @@ AudioSource:
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: f767580bbf15cdb479f6e210ac8edbce, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.15
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 0
   Mute: 0

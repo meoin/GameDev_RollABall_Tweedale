@@ -51,6 +51,8 @@ public class PickupManager : MonoBehaviour
                 collected = true;
                 player.GetComponent<PlayerControllerNew>().PickupObject();
                 gameObject.GetComponent<MeshRenderer>().enabled = false;
+                //ball.GetComponent<BallController>().PickupEffects();
+
             }
         }
         else if (!collected)

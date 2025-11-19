@@ -21,7 +21,7 @@ public class PlayerControllerNew : MonoBehaviour
     private CameraController cameraController;
     private BallController ballController;
 
-    private int pickupCount;
+    private double pickupCount;
     public int pickupValue = 1;
 
     public GameObject aimArrow;
@@ -163,7 +163,7 @@ public class PlayerControllerNew : MonoBehaviour
 
     public void PickupObject()
     {
-        pickupCount = Mathf.Min(pickupCount + pickupValue, int.MaxValue);
+        pickupCount = pickupCount + pickupValue;
         //Debug.Log("Coins: " + pickupCount);
         UpdateUI();
     }
@@ -207,19 +207,29 @@ public class PlayerControllerNew : MonoBehaviour
 
     public void UpdateUI() 
     {
-        if (pickupCount < 1000)
+        if (pickupCount >= 1000000000000.0)
         {
-            coinText.text = "$" + pickupCount;
+            double truncatedCoins = pickupCount / 1000000000000.0;
+            coinText.text = "$" + truncatedCoins.ToString("F1") + "t";
         }
-        else if (pickupCount < 1000000)
+        else if (pickupCount >= 1000000000.0)
         {
-            float truncatedCoins = pickupCount / 1000;
+            double truncatedCoins = pickupCount / 1000000000.0;
+            coinText.text = "$" + truncatedCoins.ToString("F1") + "b";
+        }
+        else if (pickupCount >= 1000000.0)
+        {
+            double truncatedCoins = pickupCount / 1000000;
+            coinText.text = "$" + truncatedCoins.ToString("F1") + "m";
+        }
+        else if (pickupCount >= 1000)
+        {
+            double truncatedCoins = pickupCount / 1000;
             coinText.text = "$" + truncatedCoins.ToString("F1") + "k";
         }
         else 
         {
-            float truncatedCoins = pickupCount / 1000000;
-            coinText.text = "$" + truncatedCoins.ToString("F1") + "m";
+            coinText.text = "$" + pickupCount;
         }
 
         if (GetTotalStrength() < 1000)
@@ -295,7 +305,7 @@ public class PlayerControllerNew : MonoBehaviour
         }
     }
 
-    public int Cash() 
+    public double Cash() 
     {
         return pickupCount;
     }
