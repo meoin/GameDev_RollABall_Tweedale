@@ -26,6 +26,7 @@ public class BallController : MonoBehaviour
     private int consecutiveCoins = 0;
 
     public GameObject coinPickupPrefab;
+    public Transform coinPickupParent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -180,7 +181,7 @@ public class BallController : MonoBehaviour
 
     private void CoinPopupText() 
     {
-        GameObject popup = Instantiate(coinPickupPrefab, transform.position, transform.rotation);
+        GameObject popup = Instantiate(coinPickupPrefab, transform.position, transform.rotation, coinPickupParent);
         popup.GetComponent<CoinTextPopup>().Initialize(playerController.pickupValue, transform);
     }
 }

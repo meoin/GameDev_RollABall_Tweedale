@@ -37,9 +37,6 @@ public class CoinTextPopup : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(Camera.main.transform);
-        transform.Rotate(0, 180, 0);
-
         timer -= Time.deltaTime;
 
         xOffset += xSpeed * Time.deltaTime;
@@ -48,7 +45,7 @@ public class CoinTextPopup : MonoBehaviour
 
         ySpeed -= Time.deltaTime * 8;
 
-        transform.position = ball.position + new Vector3(xOffset, yOffset, zOffset);
+        transform.position = ball.position + (Quaternion.Euler(0.0f, Camera.main.transform.eulerAngles.y, 0.0f) * new Vector3(xOffset, yOffset, zOffset));
 
         textComponent.alpha = timer;
 
@@ -56,6 +53,9 @@ public class CoinTextPopup : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        transform.LookAt(Camera.main.transform);
+        transform.Rotate(0, 180, 0);
     }
 
     private string TruncateNumber(double val) 

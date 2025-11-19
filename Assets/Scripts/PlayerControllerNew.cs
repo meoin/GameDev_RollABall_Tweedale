@@ -53,8 +53,9 @@ public class PlayerControllerNew : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        paused = true;
-        Time.timeScale = 0;
+        //paused = true;
+        //Time.timeScale = 0;
+        StartGame();
 
         mainCamera = Camera.main;
         rb = GetComponent<Rigidbody>();

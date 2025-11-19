@@ -9480,6 +9480,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5734832838334765297, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
   m_PrefabInstance: {fileID: 1916776055}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &575348054
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 575348056}
+  - component: {fileID: 575348055}
+  m_Layer: 0
+  m_Name: CoinPopupParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &575348055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575348054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65bc953ab85d15c42a648fb62be6d92e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 1663188840}
+--- !u!4 &575348056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 575348054}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 14.582812, y: -1.1366165, z: 6.2996464}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &575972327 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5734832838334765297, guid: d7675965ab3aad14c96ec127a952edb7, type: 3}
@@ -29253,7 +29298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1506410338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31551,6 +31596,7 @@ MonoBehaviour:
   particles: {fileID: 1445443755}
   blingSfx: {fileID: 8300000, guid: f767580bbf15cdb479f6e210ac8edbce, type: 3}
   coinPickupPrefab: {fileID: 2950794576533833131, guid: 255fc3c302cb4b046ba15a9ea77fb741, type: 3}
+  coinPickupParent: {fileID: 575348056}
 --- !u!54 &1663188842
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -39053,3 +39099,4 @@ SceneRoots:
   - {fileID: 384606945}
   - {fileID: 1506410341}
   - {fileID: 1763664165}
+  - {fileID: 575348056}
