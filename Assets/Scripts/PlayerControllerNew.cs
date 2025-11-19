@@ -42,6 +42,8 @@ public class PlayerControllerNew : MonoBehaviour
     public GameObject inventoryCanvas;
     public bool paused;
 
+    public TutorialManager tutorial;
+
     public void StartGame() 
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -128,6 +130,8 @@ public class PlayerControllerNew : MonoBehaviour
                 throwing = true;
                 chargeSlider.gameObject.SetActive(false);
                 aimArrow.SetActive(false);
+
+                tutorial.ClearTutorialOne();
             }
         }
 
@@ -242,6 +246,11 @@ public class PlayerControllerNew : MonoBehaviour
             float truncatedStrength = GetTotalStrength() / 1000;
             strengthText.text = "Str:" + truncatedStrength.ToString("F1") + "k";
         }
+
+        if (pickupCount >= 50) 
+        {
+            tutorial.ShowTutorialTwo();
+        }
     }
 
     private float GetTotalStrength() 
@@ -270,6 +279,9 @@ public class PlayerControllerNew : MonoBehaviour
     {
         if (!inventoryCanvas.activeSelf)
         {
+            tutorial.ClearTutorialThree();
+            tutorial.ShowTutorialFour();
+
             inventoryCanvas.SetActive(true);
             inventoryManager.PopulateGrid();
             Time.timeScale = 0;
@@ -279,6 +291,8 @@ public class PlayerControllerNew : MonoBehaviour
         }
         else
         {
+            tutorial.ClearTutorialFour();
+
             inventoryManager.ClearGrid();
             inventoryCanvas.SetActive(false);
             Time.timeScale = 1;

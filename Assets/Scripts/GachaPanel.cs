@@ -26,8 +26,12 @@ public class GachaPanel : MonoBehaviour
 
     private bool firstPull = true;
 
+    public TutorialManager tutorial;
+
     public void RunGacha(int sIndex, GameObject shop) 
     {
+        tutorial.ClearTutorialTwo();
+
         currentShop = shop.GetComponent<Shop>();
         shopIndex = sIndex;
 
@@ -46,6 +50,8 @@ public class GachaPanel : MonoBehaviour
         player.paused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        tutorial.ShowTutorialThree();
     }
 
     public void DeclinePet() 

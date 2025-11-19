@@ -28,6 +28,8 @@ public class BallController : MonoBehaviour
     public GameObject coinPickupPrefab;
     public Transform coinPickupParent;
 
+    public TutorialManager tutorial;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
