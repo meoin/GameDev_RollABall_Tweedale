@@ -69,13 +69,13 @@ public class PlayerControllerNew : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.T))
+        if (Input.GetKeyDown(KeyCode.T))
         {
             inventoryManager.AddPetToInventory(new PetDetails("Goobert", 500, 1, "Red"));
             SpawnPet();
         }
 
-        if (Input.GetKeyDown(KeyCode.Y)) 
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             inventoryManager.AddPetToInventory(new PetDetails("Yellert", 50, 3, "Yellow"));
             SpawnPet();
@@ -85,7 +85,7 @@ public class PlayerControllerNew : MonoBehaviour
         {
             inventoryManager.AddPetToInventory(new PetDetails("Demon", 5000, 3, "Black"));
             SpawnPet();
-        }*/
+        }
 
         if (Input.GetKeyDown(KeyCode.I)) 
         {
