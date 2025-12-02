@@ -20,7 +20,7 @@ public class Shop : MonoBehaviour
     void Start()
     {
         gameObject.GetComponent<SpriteRenderer>().sprite = sprite;
-        priceText.text = $"${price}";
+        priceText.text = $"{CostText(price)}";
         buyIcon.SetActive(false);
     }
 
@@ -48,5 +48,23 @@ public class Shop : MonoBehaviour
     {
         canPurchase = toggle;
         buyIcon.SetActive(toggle);
+    }
+
+    public string CostText(int p) 
+    {
+        if (p >= 1000000.0)
+        {
+            double truncatedCoins = price / 1000000;
+            return "$" + truncatedCoins.ToString("F0") + "m";
+        }
+        else if (p >= 1000)
+        {
+            double truncatedCoins = price / 1000;
+            return "$" + truncatedCoins.ToString("F0") + "k";
+        }
+        else
+        {
+            return "$" + p;
+        }
     }
 }

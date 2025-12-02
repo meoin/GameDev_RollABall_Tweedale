@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.ProBuilder.Shapes;
 using UnityEngine.UIElements;
 
 public class BallController : MonoBehaviour
@@ -12,11 +13,13 @@ public class BallController : MonoBehaviour
     private Vector3 throwVector;
     private float throwBufferTime = 2;
     public float pushStrength = 1f;
+    public float rotationSpin = 2f;
 
     private CameraController camera;
 
     public GameObject loopDestination;
     public PlayerControllerNew playerController;
+    public Transform playerTransform;
 
     public ParticleSystem particles;
 
@@ -47,11 +50,14 @@ public class BallController : MonoBehaviour
             //rb.useGravity = false;
             transform.position = ballHoldPoint.position;
             rb.linearVelocity = new Vector3(0f, 0f, 0f);
+            transform.rotation = playerTransform.rotation * Quaternion.Euler(0, -90, 0);
             //Debug.Log(rb.linearVelocity);
         }
         else if (ballThrow) 
         {
+            rb.freezeRotation = false;
             transform.position = ballThrowPoint.position;
+            rb.AddTorque(throwVector.magnitude * transform.forward * -1 * rotationSpin, ForceMode.Force);
             rb.AddForce(throwVector, ForceMode.Impulse);
             ballThrow = false;
             particles.Play();
@@ -112,6 +118,7 @@ public class BallController : MonoBehaviour
             //Ball return to player:
             if ((speed < 1f && throwBufferTime <= 0) || transform.position.y < -5f || Input.GetKeyDown(KeyCode.R))
             {
+                rb.freezeRotation = true;
                 consecutiveCoins = 0;
                 pitchIncrease = 1f;
                 particles.Clear();

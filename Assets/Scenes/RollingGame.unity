@@ -6874,7 +6874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: price
-      value: 1000000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: sprite
@@ -22538,7 +22538,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: price
-      value: 100000
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: sprite
@@ -30846,7 +30846,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: 99a9ce524f955f745be610c1b9507cdd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30884,13 +30884,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1663188836}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.6700001, y: 0.758, z: -13.792}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!114 &1663188841
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30908,8 +30908,10 @@ MonoBehaviour:
   holdingBall: 1
   frictionPower: 15
   pushStrength: 200
+  rotationSpin: 5
   loopDestination: {fileID: 1081128561}
   playerController: {fileID: 1052070065}
+  playerTransform: {fileID: 1052070069}
   particles: {fileID: 1445443755}
   blingSfx: {fileID: 8300000, guid: f767580bbf15cdb479f6e210ac8edbce, type: 3}
   coinPickupPrefab: {fileID: 2950794576533833131, guid: 255fc3c302cb4b046ba15a9ea77fb741, type: 3}
