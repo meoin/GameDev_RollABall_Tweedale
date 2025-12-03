@@ -6874,7 +6874,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: price
-      value: 5000000
+      value: 50000000
       objectReference: {fileID: 0}
     - target: {fileID: 7355836022077056480, guid: 1f2f1e0f30e5a2441861417344940243, type: 3}
       propertyPath: sprite
@@ -34130,7 +34130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1831430950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36994,11 +36994,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 282811d3e00cf9a498b92c47cb8d9c75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 5000000000
+  price: 50000000000000
   priceText: {fileID: 1863518192}
   buyIcon: {fileID: 682096824}
-  playerController: {fileID: 0}
-  winCanvas: {fileID: 0}
+  playerController: {fileID: 1052070065}
+  winCanvas: {fileID: 1831430949}
 --- !u!1001 &1964209011
 PrefabInstance:
   m_ObjectHideFlags: 0
