@@ -22,7 +22,7 @@ public class PlayerControllerNew : MonoBehaviour
     private BallController ballController;
 
     private double pickupCount;
-    public int pickupValue = 1;
+    public double pickupValue = 1;
 
     public GameObject aimArrow;
     public Slider chargeSlider;
@@ -212,7 +212,12 @@ public class PlayerControllerNew : MonoBehaviour
 
     public void UpdateUI() 
     {
-        if (pickupCount >= 1000000000000.0)
+        if (pickupCount >= 1000000000000000.0)
+        {
+            double truncatedCoins = pickupCount / 1000000000000000.0;
+            coinText.text = "$" + truncatedCoins.ToString("F1") + "q";
+        }
+        else if (pickupCount >= 1000000000000.0)
         {
             double truncatedCoins = pickupCount / 1000000000000.0;
             coinText.text = "$" + truncatedCoins.ToString("F1") + "t";

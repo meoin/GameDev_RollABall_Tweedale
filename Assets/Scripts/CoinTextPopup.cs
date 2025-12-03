@@ -62,7 +62,7 @@ public class CoinTextPopup : MonoBehaviour
     {
         if (val < 1000)
         {
-            return $"{val}";
+            return $"{val.ToString("F0")}";
         }
         else if (val < 1000000.0)
         {

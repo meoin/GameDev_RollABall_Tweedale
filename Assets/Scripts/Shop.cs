@@ -52,7 +52,12 @@ public class Shop : MonoBehaviour
 
     public string CostText(int p) 
     {
-        if (p >= 1000000.0)
+        if (p >= 1000000000.0)
+        {
+            double truncatedCoins = price / 1000000000;
+            return "$" + truncatedCoins.ToString("F0") + "b";
+        }
+        else if (p >= 1000000.0)
         {
             double truncatedCoins = price / 1000000;
             return "$" + truncatedCoins.ToString("F0") + "m";

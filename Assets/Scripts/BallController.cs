@@ -162,7 +162,7 @@ public class BallController : MonoBehaviour
     {
         transform.position = loopDestination.transform.position;
         ReactivateAllCoins();
-        playerController.pickupValue = playerController.pickupValue * 2;
+        playerController.pickupValue = playerController.pickupValue * 1.5;
     }
 
     private void ReactivateAllCoins() 
